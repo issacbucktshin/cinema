@@ -1,0 +1,13 @@
+<div class="search-container main-container">
+  <div class="form">
+    <form class="example-form" [formGroup]="searchFormGroup">
+      <mat-form-field class="example-full-width">
+        <input matInput formControlName="search" placeholder="Search Movie" (keyup)="termSearched()">
+        <i class='material-icons'>search</i>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="actions">
+    <i class='material-icons' (click)="hide()">close</i>
+  </div>
+</div>

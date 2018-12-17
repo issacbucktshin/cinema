@@ -1,0 +1,56 @@
+<!-- <div class="movie-details-container">
+        <i class='material-icons pointer' (click)="close()">arrow_back_ios</i>
+    <div class="card expand">
+        <div class="image" [ngStyle]="{'background':'url(' + movie.Poster +')'
+        ,'background-size': 'cover',
+    'background-position': 'center center'}"></div>
+        <div class="description">
+            <div>
+                <h5 class="sub">Movie Name</h5>
+                <h4>{{movie.Title}}</h4>
+            </div>
+            <div>
+                <h5 class="sub">Run Time</h5>
+                <h4>{{movie.RunTime}}</h4>
+            </div>
+            <div>
+                <h5 class="sub">Rating</h5>
+                <h4>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </h4>
+            </div>
+        </div>
+        <div class="long-description">
+            <h1>Lorem ipsum dolor sit amet</h1>
+            <p>{{movie.Plot}}</p>
+        </div>
+    </div>
+</div> -->
+<app-nav></app-nav>
+<div class="movie-details-container">
+    <i class='material-icons pointer' (click)="close()">arrow_back_ios</i>
+    <div class="movie-details-card">
+        <div class="card" [class.mobile]="mobileQuery.matches">
+            <section class="movie-image">
+                <img class="movie-poster" [src]="movie.Poster">
+            </section>
+            <section class="movie-dtails">
+                <div class='card-body'>
+                    <h3>{{movie.Title}}</h3>
+                    <div class="movie-info">
+                        <p>{{movie.Year}}</p>
+                        <p>{{movie.Runtime}}</p>
+                        <p>{{movie.Type}}</p>
+                    </div>
+                    <div class="movie-desc">
+                        <p>{{movie.Plot}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<!-- <p-sidebar [(visible)]="showDetails" [fullScreen]="true">
+  <movie-details (closeEmitter)="showDetails=false" [movie]="movie"></movie-details>
+</p-sidebar> -->
+<div class="movie-card-container pointer" (mouseleave)="hover=false" (mouseover)="hover=true">
+  <div class='card'>
+    <header (click)="showDetails=true">
+      <img mat-card-image [src]="movie.Poster">
+    </header>
+    <div class='card-body'>
+      <h1 class='title'>{{movie.Title | friendlyTitle}}</h1>
+      <h4>{{movie.Year}}</h4>
+      <div class="details">
+        <div>
+          <p>Director</p>
+          <span>{{movie.Director}}</span>
+        </div>
+        <div>
+          <p>Runtime</p>
+          <span>{{movie.Runtime}}</span>
+        </div>
+        <div>
+          <p>Genre</p>
+          <span>{{movie.Genre}}</span>
+        </div>
+      </div>
+      <button mat-mini-fab color="accent" [class.hover]="hover" (click)="edit=true">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<p-sidebar [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
+  <save-movie *ngIf="edit" [movie]="movie"></save-movie>
+</p-sidebar>

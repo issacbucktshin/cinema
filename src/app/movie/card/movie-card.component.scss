@@ -1,0 +1,60 @@
+.movie-card-container {
+    padding: 10px;
+
+    &:hover {
+        box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
+        transform: scale(1.10, 1.10);
+
+        img {
+            height: 100%;
+            width: 100%;
+            opacity: 0.6;
+        }
+        .card-body {
+            background-color: transparent;
+            position: relative;
+            opacity: 1;
+        }
+    }
+
+    .card {
+        header{
+            img {
+                // width: 250px;
+                // height: 350px;
+                width: auto;
+                height: auto;
+                max-width: 350px;
+                max-height: 450px;
+            }
+        }
+        .card-body {
+            h1 {
+                width: 200px;
+                word-break: break-all;
+                white-space: normal;
+                font-size: 1.2rem !important;
+            }
+            h4 {
+                font-size: 1rem !important;
+            }
+            .details {
+                display: flex;
+               // flex-direction: column-reverse;
+                //flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            button {
+                display: none;
+                text-align: center;
+                float: right;
+                
+                &.hover {
+                    z-index: 100;
+                    display: block;
+                }
+            }
+        }
+    }
+    
+}

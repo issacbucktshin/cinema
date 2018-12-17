@@ -1,0 +1,331 @@
+/*------ Card ------ */
+
+.card {
+    position: relative;
+    margin-bottom: 24px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: all 0.5s ease;
+    &:hover{
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .card-header {
+        border: none !important;
+        position: relative;
+        padding: 20px 24px;
+        color: $titleColor;
+        background-color: transparent;
+        .title{
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .subtitle{
+            display: block;
+            margin-top: 8px;
+            opacity: .5;
+        }
+    }
+    .card-toolbar{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 1;
+        color:#666;
+        i{
+            cursor: pointer;
+        }
+    }
+    .card-body {
+        padding: 20px 24px;
+    }
+    .card-actions{
+        clear: both;
+        padding: 20px 24px;
+        text-align: right;
+    }
+}
+
+/*----------- prime table ---- */
+/*---paging */
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev
+{
+    color: $accent;
+    background-color: white !important;
+    background: none !important; 
+    height: 30px !important;
+}
+.ui-datatable{
+    .ui-datatable-footer{
+        text-align: right;
+        color: rgba(0,0,0,.54);
+    }
+}
+.ui-datatable table{
+    width: 100%;
+    clear: both;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    .ui-datatable-thead{
+        th{
+            color: rgba(0,0,0,.54);
+            flex: 1;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: none;
+            padding: 12px 24px;
+            border-bottom: 1px solid #e7e8ea;
+            text-align: left;
+        }
+    }
+    .ui-datatable-data{
+        tr{
+            td{
+                color: rgba(0,0,0,.54);
+                flex: 1;
+                font-size: 0.9rem;
+                font-weight: 500;
+                border: none;
+                padding: 12px 24px;
+                border-bottom: 1px solid #e7e8ea;
+            }
+            &.ui-datatable-odd{
+                td{
+                    background-color: #f9f9f9; 
+                }
+            }
+        }
+        tr.selected{
+            background-color: rgba(31, 226, 96, 0.7);
+            td{
+                background: inherit;
+            }
+        }
+    }
+}
+
+/* PrimeNG v6   */
+
+/* Table*/
+.ui-table {
+    table, th, td {
+        color: $textColor !important;
+        font-family: $fontFamily !important;
+        font-weight: normal;    
+    }
+    
+    box-shadow:0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+
+    .ui-state-highlight {
+        background: white !important;
+        color: inherit !important;
+
+        a {
+            color: #337ab7;
+        }
+    }
+    .ui-sortable-column.ui-state-highlight .ui-sortable-column-icon {
+        color:  inherit !important;
+    }
+    .ui-table-thead {
+        tr{
+            th {
+                background: #fff;
+                
+                a{
+                    color: #337ab7;
+                }
+                a:visited{
+                    color: inherit;
+                }
+            }
+            td {
+                background: inherit;
+            }
+        }
+    }
+    .ui-table-tfoot {
+        background: inherit;
+        text-align: right;
+    }
+    .ui-paginator-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: 56px;
+        padding: 0 8px;
+        flex-wrap: wrap-reverse;
+        background: white;
+
+        .ui-paginator-page.ui-state-active {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .ui-paginator, .ui-paginator-element, .ui-paginator-page {
+            background-color: transparent !important;
+            height: 21px !important; 
+            color: inherit !important;
+            border: none;
+        }
+    } 
+}
+
+
+.p-tbale-body {
+    border: 1px solid #D5D5D5 !important;
+}
+.row-table {
+    background-color: white !important;
+    color: black !important;
+    height:48px !important;
+    border-bottom: 1px solid #D5D5D5 !important;
+    
+}
+.col-table {
+    border: none !important;
+    background-color: white !important;
+    padding-left: 12px !important;
+}
+
+/*------------------- Primeng confirm dialog   -------- */
+.ui-confirmdialog.ui-dialog{
+    box-shadow: 2px 3px 10px 0 rgba(0,0,0,0.4);
+     .ui-dialog-titlebar{
+        padding: 1rem;
+        span.ui-dialog-title{
+            font-family: $fontFamily;
+            font-size: 1.25rem;
+            color: $titleColor;
+        }
+    }
+    .ui-button{
+        font-family: $fontFamily;
+        border: none;
+        margin: 0;
+        min-width: 88px;
+        line-height: 36px;
+        padding: 8px 16px;
+        border-radius: 2px;
+        user-select: none;
+        cursor: pointer;
+        outline: 0;
+        background: transparent;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+            background: rgba(181, 181, 181, 0.30);
+        }
+        span.ui-button-text{
+            padding: 0;
+        }
+        span.ui-button-icon-left{
+            display: none;
+        }
+    }
+    div.ui-dialog-content{
+        padding: 0 1rem;
+        color:$textColor;
+        .fa{
+            display: none;
+        }
+        span.ui-confirmdialog-message{
+            line-height: 1.5;
+            font-weight: 500;
+        }
+    }
+}
+.ui-widget-overlay {
+    z-index: 1 !important;
+}
+.ui-sidebar	{
+    background-color: white;
+    padding: 0;
+    z-index: 1000 !important;
+
+    header {
+        .header {
+            height: 140px;
+        }
+        .header:after {
+            background-size: cover !important;
+            height: 180px;
+            content: "";
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .header-content {
+            padding: 20px;
+            text-align: left;
+            color: $primary;
+            font-family: $fontFamily !important;
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+    }
+
+    .ui-sidebar-close {
+        color: white;
+    }
+}
+.ui-widget-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+/*------------------ Primeng overlay ----- */
+.ui-overlaypanel{
+    background: #fff;
+    padding: 1rem;
+    max-width: 600px;
+    .ui-overlaypanel-close{
+        right: 2px;
+        top:2px;
+        span.fa-fw{
+            font-size: 18px;
+            color: $accent;
+        }
+    }
+}
+/*primeng growl*/
+.ui-growl{
+    transition: all 2.5s ease;
+}
+.ui-growl-message-error{
+    background-color: #f72c2c;
+    color: #fff;
+}
+/*----- Buttons ----- */
+.mat-raised-button.mat-primary{
+    //background-color: $secondaryColor;
+}
+/* ----- confirmdialog -----*/
+.ui-confirmdialog{
+    background: #fff;
+}
+
+/*Angular material input*/
+.mat-form-field,.mat-select{
+    width: 100%;
+    line-height: 1.125;
+}
+.mat-select {
+    padding: 0;
+    padding: 1rem 0;
+    font-size: 1rem;
+}
+
+.mat-select-content { 
+    z-index: 9999999 !important;
+}
+
+.mat-focused .mat-form-field-required-marker{
+    color: #df3131 !important;
+}
+/*----------- Buttons  --------------*/
+.btn-primary{
+    background-color:$accent !important;
+}
+

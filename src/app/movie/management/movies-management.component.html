@@ -1,0 +1,21 @@
+<app-nav [showActionIcons]="true" (searchEmitter)="searchMovies($event)"></app-nav>
+<p-messages [(value)]="messages"></p-messages>
+<div class="movies-management-container">
+  <section>
+    <div class="actions">
+      <button mat-mini-fab color="accent">
+        <mat-icon color="primary">add</mat-icon>
+      </button>
+    </div>
+  </section>
+  <section>
+    <div *ngIf="!loading" class="movies-management">
+      <ul>
+        <li *ngFor="let movie of movies">
+          <movie-card *ngIf="movie.Poster != 'N/A'" [movie]="movie"></movie-card>
+        </li>
+      </ul>
+    </div>
+    <app-loader *ngIf="loading"></app-loader>
+  </section>
+</div>
