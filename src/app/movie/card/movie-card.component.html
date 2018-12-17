@@ -1,34 +1,63 @@
-<!-- <p-sidebar [(visible)]="showDetails" [fullScreen]="true">
-  <movie-details (closeEmitter)="showDetails=false" [movie]="movie"></movie-details>
-</p-sidebar> -->
-<div class="movie-card-container pointer" (mouseleave)="hover=false" (mouseover)="hover=true">
-  <div class='card'>
-    <header (click)="showDetails=true">
-      <img mat-card-image [src]="movie.Poster">
+<div class="movie-card-container pointer">
+  <div *ngIf="!movie.displayDetails" class='card' [ngStyle]="{'background': 'url(' + movie.Poster +')', 'background-size': '300px 400px', 'background-repeat': 'no-repeat'}">
+    <header>
+      <h4 class='title'></h4>
+    </header>
+    <div class='card-body'>
+      <div>
+
+      </div>
+    </div>
+  </div>
+  <!-- details popup -->
+  <div *ngIf="movie.displayDetails" class='card'>
+    <header>
+      <h4 class='title'>
+        <i class='material-icons' (click)="hide()">close</i>
+      </h4>
     </header>
     <div class='card-body'>
       <h1 class='title'>{{movie.Title | friendlyTitle}}</h1>
-      <h4>{{movie.Year}}</h4>
+      <h4>
+        <i class="fa fa-calendar-o" aria-hidden="true">
+          <span> {{movie.Year}}</span>
+        </i>
+      </h4>
       <div class="details">
         <div>
-          <p>Director</p>
-          <span>{{movie.Director}}</span>
+          <p>
+            <i class="fa fa-user" aria-hidden="true">
+              <span class="title bold"> Director </span>
+            </i>
+            <span> {{movie.Director}}</span>
+          </p>
         </div>
         <div>
-          <p>Runtime</p>
-          <span>{{movie.Runtime}}</span>
+          <p>
+            <i class="fa fa-clock-o" aria-hidden="true">
+              <span class="title bold"> Runtime </span>
+            </i>
+            <span> {{movie.Runtime}}</span>
+          </p>
         </div>
         <div>
-          <p>Genre</p>
-          <span>{{movie.Genre}}</span>
+          <p>
+            <i class="fa fa-mars-stroke-v" aria-hidden="true">
+              <span class="title bold"> Genre </span>
+            </i>
+            <span> {{movie.Genre}}</span>
+          </p>
         </div>
       </div>
-      <button mat-mini-fab color="accent" [class.hover]="hover" (click)="edit=true">
-        <mat-icon color="primary">edit</mat-icon>
-      </button>
+      <div class="actions">
+        <button mat-mini-fab color="accent" (click)="edit=true">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
+<!-- edit movie popup -->
 <p-sidebar [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
   <save-movie *ngIf="edit" [movie]="movie"></save-movie>
 </p-sidebar>

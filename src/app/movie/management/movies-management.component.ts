@@ -13,31 +13,52 @@ import { MessageSeverity } from 'src/app/model/message/message-severity.enum';
 })
 export class MoviesManagementComponent implements OnInit {
 
+  d: boolean;
   movies: MovieModel[] = [];
+  selectedMovie: MovieModel;
+  show: boolean;
   messages: MessageModel[] = [];
   loading: boolean;
-  
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
     this.setMovies();
   }
-
+  displayDetails = (movie: MovieModel) => {
+    this.movies.find(m => m.imdbID == movie.imdbID).displayDetails = true;
+  }
+  hide = (movie: MovieModel) => {
+    let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
+    let m = this.movies.find(m => m.imdbID == movie.imdbID);
+    let n = new MovieModel
+    const c = Object.assign(n, m);
+    this.movies.splice(i, 1);
+    this.movies.splice(i, 0, c);
+  }
   setMovies = () => {
     this.loading = true;
     this.movieService.getMovies('inception')
-      .pipe(
-        finalize(() => this.loading = false)
-      )
-      .subscribe(movies => {
-        console.log(movies)
-        this.movies = movies.Search
+      .subscribe(response => {
+        let movies = response.Search;
+        movies.forEach(movie => {
+          this.getMovieDetails(movie.imdbID)
+            .pipe(
+              finalize(() => this.loading = false)
+            )
+            .subscribe(movie => {
+              movie.displayDetails = false
+              this.movies.push(movie);
+            })
+        });
       }, error => {
         this.loading = false;
         this.alert(error)
       })
   }
-
+  getMovieDetails = (movieId:string) => {
+    return this.movieService.getById(movieId);
+  }
   searchMovies = (term: string) => {
     this.loading = true;
     this.movieService.getMovies(term)
