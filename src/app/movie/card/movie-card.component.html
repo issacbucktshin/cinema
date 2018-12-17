@@ -1,9 +1,5 @@
-<!-- <p-sidebar [(visible)]="showDetails" [fullScreen]="true">
-  <movie-details (closeEmitter)="showDetails=false" [movie]="movie"></movie-details>
-</p-sidebar> -->
-
-<div class="movie-card-container pointer" (mouseleave)="hover=false" (mouseover)="hover=true">
-  <div class='card'>
+<div class="movie-card-container pointer">
+  <!-- <div class='card'>
     <header (click)="showDetails=true">
       <img mat-card-image [src]="movie.Poster">
     </header>
@@ -28,8 +24,47 @@
         <mat-icon color="primary">edit</mat-icon>
       </button>
     </div>
+  </div> -->
+  <div *ngIf="!movie.showd" class='card' [ngStyle]="{'background': 'url(' + movie.Poster +')', 'background-size': '300px 400px', 'background-repeat': 'no-repeat'}">
+    <header>
+      <h4 class='title'></h4>
+    </header>
+    <div class='card-body'>
+      <div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="movie.showd" class='card'>
+    <header>
+      <h4 class='title'>d mode</h4>
+    </header>
+    <div class='card-body'>
+      <i class='material-icons' (click)="hide()">close</i>
+      <h1 class='title'>{{movie?.Title | friendlyTitle}}</h1>
+      <h4>{{movie?.Year}}</h4>
+      <div class="details">
+        <div>
+          <p>Director</p>
+          <span>{{movie?.Director}}</span>
+        </div>
+        <div>
+          <p>Runtime</p>
+          <span>{{movie?.Runtime}}</span>
+        </div>
+        <div>
+          <p>Genre</p>
+          <span>{{movie?.Genre}}</span>
+        </div>
+        <button mat-mini-fab color="accent" (click)="edit=true">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+<!-- edit movie popup -->
 <p-sidebar [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
   <save-movie *ngIf="edit" [movie]="movie"></save-movie>
 </p-sidebar>

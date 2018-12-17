@@ -3,6 +3,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { SidebarModule } from 'primeng/sidebar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
     imports: [],
@@ -10,7 +11,8 @@ import { SidebarModule } from 'primeng/sidebar';
         CarouselModule,
         MessagesModule,
         MessageModule,
-        SidebarModule
+        SidebarModule,
+        OverlayPanelModule
     ],
     declarations: [],
     providers: [

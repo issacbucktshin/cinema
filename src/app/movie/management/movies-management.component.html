@@ -12,10 +12,36 @@
     <div *ngIf="!loading" class="movies-management">
       <ul>
         <li *ngFor="let movie of movies">
-          <movie-card *ngIf="movie.Poster != 'N/A'" [movie]="movie"></movie-card>
+          <div #actualTarget>
+            <movie-card (hided)="hide($event)" *ngIf="movie.Poster != 'N/A'" (click)="open($event,movie,op)"
+              [movie]="movie" [d]="movie?.showd"></movie-card>
+          </div>
         </li>
       </ul>
     </div>
     <app-loader *ngIf="loading"></app-loader>
   </section>
 </div>
+<!-- details popup -->
+<p-overlayPanel #op>
+  <i class='material-icons' (click)="hide($event,selectedMovie,op)">close</i>
+  <h1 class='title'>{{selectedMovie?.Title | friendlyTitle}}</h1>
+  <h4>{{selectedMovie?.Year}}</h4>
+  <div class="details">
+    <div>
+      <p>Director</p>
+      <span>{{selectedMovie?.Director}}</span>
+    </div>
+    <div>
+      <p>Runtime</p>
+      <span>{{selectedMovie?.Runtime}}</span>
+    </div>
+    <div>
+      <p>Genre</p>
+      <span>{{selectedMovie?.Genre}}</span>
+    </div>
+    <button mat-mini-fab color="accent" (click)="edit=true">
+      <mat-icon color="primary">edit</mat-icon>
+    </button>
+  </div>
+</p-overlayPanel>

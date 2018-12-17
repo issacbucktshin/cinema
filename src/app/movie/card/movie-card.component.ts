@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { MovieModel } from 'src/app/model/movie/movie.model';
 
@@ -9,7 +9,9 @@ import { MovieModel } from 'src/app/model/movie/movie.model';
 })
 export class MovieCardComponent implements OnInit {
 
-  @Input()movie:MovieModel;
+  @Output() hided = new EventEmitter<any>();
+  @Input() movie:MovieModel;
+  @Input() d:boolean;
   hover:boolean;
   edit:boolean;
   showDetails:boolean;
@@ -17,10 +19,14 @@ export class MovieCardComponent implements OnInit {
   constructor(private movieService:MovieService) { }
 
   ngOnInit() {
-    this.setMovieDetails();
+    //this.setMovieDetails();
   }
 
-  setMovieDetails = () => {debugger
+  hide = () => {
+    this.movie.showd = false;
+    this.hided.next(this.movie);
+  }
+  setMovieDetails = () => {
     this.movieService.getById(this.movie.imdbID)
         .subscribe(movie => this.movie = movie)
   }
