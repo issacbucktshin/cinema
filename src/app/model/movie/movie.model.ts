@@ -9,5 +9,5 @@ export class MovieModel
     Director: string;
     Plot?:string;
     Type:string;
-    showd: boolean;
+    displayDetails: boolean;
 }

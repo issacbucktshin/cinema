@@ -25,55 +25,40 @@ export class MoviesManagementComponent implements OnInit {
   ngOnInit() {
     this.setMovies();
   }
-  open = (event, movie: MovieModel, overlaypanel: any) => {
-    this.movies.find(m => m.imdbID == movie.imdbID).showd = true;
-    
-    // this.movieService.getById(movie.imdbID)
-    //   .subscribe(details => {
-    //     this.selectedMovie = details;
-    //     overlaypanel.show(event);
-    //   })
+  displayDetails = (movie: MovieModel) => {
+    this.movies.find(m => m.imdbID == movie.imdbID).displayDetails = true;
   }
   hide = (movie: MovieModel) => {
-    debugger
-    // const m = this.movies.find(m => m.imdbID == movie.imdbID);
-    // this.movies.splice(i, 1);
-    
-    
-    // this.movies = mov;
-    // let mov:MovieModel[] = this.movies
-    // mov.find(m => m.imdbID == movie.imdbID).showd = false;
     let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
     let m = this.movies.find(m => m.imdbID == movie.imdbID);
     let n = new MovieModel
-    const c= Object.assign(n,m);
+    const c = Object.assign(n, m);
     this.movies.splice(i, 1);
-    //this.movies.push(c);
-    console.log("this movies", this.movies);
     this.movies.splice(i, 0, c);
-
-
-    // this.movies = mov;
-    // console.log(this.movies)
-
-    // this.selectedMovie = new MovieModel;
-    // overlaypanel.hide(event, "actualTarget");
   }
   setMovies = () => {
     this.loading = true;
     this.movieService.getMovies('inception')
-      .pipe(
-        finalize(() => this.loading = false)
-      )
-      .subscribe(movies => {
-        console.log(movies)
-        this.movies = movies.Search
+      .subscribe(response => {
+        let movies = response.Search;
+        movies.forEach(movie => {
+          this.getMovieDetails(movie.imdbID)
+            .pipe(
+              finalize(() => this.loading = false)
+            )
+            .subscribe(movie => {
+              movie.displayDetails = false
+              this.movies.push(movie);
+            })
+        });
       }, error => {
         this.loading = false;
         this.alert(error)
       })
   }
-
+  getMovieDetails = (movieId:string) => {
+    return this.movieService.getById(movieId);
+  }
   searchMovies = (term: string) => {
     this.loading = true;
     this.movieService.getMovies(term)
