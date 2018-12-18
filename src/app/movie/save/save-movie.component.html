@@ -1,24 +1,63 @@
 <div class="save-movie-container">
   <header>
-    <h4 class="title" style="font-weight:normal">Edit: {{movie.Title}}</h4>
+    <div class="movie-img">
+      <img [src]="movie.Poster">
+    </div>
+    <div class="title">
+      <h3><span>{{movie.Title}}</span></h3>
+    </div>
   </header>
-  <form action="">
-    <div class="example-container">
+  <form [formGroup]="movieFormGroup">
+    <div class="save-container">
+
       <mat-form-field color="accent">
-        <input matInput placeholder="Input">
+        <input matInput placeholder="Title" formControlName="Title">
+        <mat-error *ngIf="movieFormGroup.get('title')?.errors?.required">
+          Title is missing
+        </mat-error>
+        <mat-error *ngIf="movieFormGroup.get('title')?.errors?.pattern">
+          Title can contain only strings
+        </mat-error>
+        <!-- <mat-error *ngIf="movieFormGroup.get('title')?.errors?.notUnique">Title exssit</mat-error> -->
       </mat-form-field>
 
-      <mat-form-field>
-        <textarea matInput placeholder="Textarea"></textarea>
+      <mat-form-field color="accent">
+        <input matInput type="number" placeholder="Year" formControlName="Year">
+        <mat-error *ngIf="movieFormGroup.get('year')?.errors?.required">
+          Year is missing
+        </mat-error>
+        <!-- <mat-error *ngIf="movieFormGroup.get('title')?.errors?.pattern">
+            Title can contain only strings
+          </mat-error> -->
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Select">
-          <mat-option value="option">Option</mat-option>
-        </mat-select>
+      <mat-form-field color="accent">
+        <input matInput type="text" placeholder="Director" formControlName="Director">
+        <mat-error *ngIf="movieFormGroup.get('director')?.errors?.required">
+          Director is missing
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input matInput type="number" placeholder="Runtime" formControlName="Runtime">
+        <mat-error *ngIf="movieFormGroup.get('runtime')?.errors?.required">
+          Runtime is missing
+        </mat-error>
+        <!-- <mat-error *ngIf="movieFormGroup.get('title')?.errors?.pattern">
+            Title can contain only strings
+          </mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input matInput type="text" placeholder="Genre" formControlName="Genre">
+        <mat-error *ngIf="movieFormGroup.get('genre')?.errors?.required">
+          Genre is missing
+        </mat-error>
       </mat-form-field>
     </div>
   </form>
-  <button mat-raised-button color="primary">Save</button>
-  <button mat-stroked-button>Close</button>
+  <div class="actions">
+    <button mat-stroked-button (click)="save()">Close</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </div>
 </div>

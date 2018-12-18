@@ -1,0 +1,25 @@
+.save-movie-container {
+    margin: 1rem;
+
+    header {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px;
+        margin-bottom: 5px;
+
+        .movie-img{
+            opacity: 0.8;
+    
+            img {
+                width: 50%;
+                height: 90%;
+            }
+        }
+    }
+    .actions {
+        text-align: right;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}

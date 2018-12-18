@@ -5,15 +5,7 @@
         height: 400px;
         width: 300px;
         opacity: 0.8;
-
-        header{
-            .title {
-                i {
-                    position: absolute;
-                    right: 0;
-                }
-            }
-        }
+        border: 1px solid #f9aa33 !important;
         .card-body {
             h1 {
                 width: 200px;

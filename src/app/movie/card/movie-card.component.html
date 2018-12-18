@@ -1,4 +1,5 @@
 <div class="movie-card-container pointer">
+  <!-- default movie display -->
   <div *ngIf="!movie.displayDetails" class='card' [ngStyle]="{'background': 'url(' + movie.Poster +')', 'background-size': '300px 400px', 'background-repeat': 'no-repeat'}">
     <header>
       <h4 class='title'></h4>
@@ -9,7 +10,9 @@
   <div *ngIf="movie.displayDetails" class='card'>
     <header>
       <h4 class='title'>
-        <i class='material-icons' (click)="hide()">close</i>
+        <button mat-icon-button color="accent">
+          <i class='material-icons' color="primary" (click)="hide()">keyboard_backspace</i>
+        </button>
       </h4>
     </header>
     <div class='card-body'>
@@ -55,5 +58,5 @@
 </div>
 <!-- edit movie popup -->
 <p-sidebar [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
-  <save-movie *ngIf="edit" [movie]="movie"></save-movie>
+  <save-movie *ngIf="edit" [movie]="movie" (movieSaved)="updateMovie($event)"></save-movie>
 </p-sidebar>
