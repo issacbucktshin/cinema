@@ -10,7 +10,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SaveMovieComponent implements OnInit {
 
   @Input() movie: MovieModel;
+  @Input() editMode: boolean;
   @Output() movieSaved = new EventEmitter;
+  @Output() movieAdded = new EventEmitter<MovieModel>();
+  @Output() movieClosed = new EventEmitter;
   movieFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
@@ -18,7 +21,7 @@ export class SaveMovieComponent implements OnInit {
   ngOnInit() {
     this.createForm();
   }
-  
+
   createForm = () => {
     this.movieFormGroup = this.formBuilder.group({
       Title: [this.movie && this.movie.Title, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -31,9 +34,20 @@ export class SaveMovieComponent implements OnInit {
   }
 
   save = () => {
-    debugger
     let movie = this.movieFormGroup.value;
-    this.movieSaved.next(movie);
+    debugger
+    if(this.editMode)
+    {
+      this.movieSaved.next(movie);
+    }
+    else 
+    {
+      this.movieAdded.next(movie);
+    }
+  }
+
+  close = () => {
+    this.movieClosed.next();
   }
 
   get form() { return this.movieFormGroup.controls; }

@@ -1,10 +1,12 @@
 <div class="save-movie-container">
   <header>
     <div class="movie-img">
-      <img [src]="movie.Poster">
+      <img *ngIf="!editMode" src="/assets/images/poster.jpg">
+      <img *ngIf="editMode" [src]="movie?.Poster">
     </div>
     <div class="title">
-      <h3><span>{{movie.Title}}</span></h3>
+      <h3 *ngIf="!editMode"><span>New Movie</span></h3>
+      <h3 *ngIf="editMode"><span>{{movie.Title | friendlyTitle}}</span></h3>
     </div>
   </header>
   <form [formGroup]="movieFormGroup">
@@ -60,7 +62,7 @@
     </div>
   </form>
   <div class="actions">
-    <button mat-stroked-button (click)="save()">Close</button>
+    <button mat-stroked-button (click)="close()">Close</button>
     <button mat-raised-button color="primary" [disabled]="movieFormGroup.invalid" (click)="save()">Save</button>
   </div>
 </div>
