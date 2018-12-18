@@ -18,20 +18,23 @@ export class SaveMovieComponent implements OnInit {
   ngOnInit() {
     this.createForm();
   }
-
+  
   createForm = () => {
     this.movieFormGroup = this.formBuilder.group({
-      Title: [this.movie && this.movie.Title, [Validators.required, Validators.pattern('^[a-z]+$')]],
-      Year: [this.movie && this.movie.Year, [Validators.required]],
-      Director: [this.movie && this.movie.Director, Validators.required],
-      Runtime: [this.movie && this.movie.Runtime, Validators.required],
-      Genre: [this.movie && this.movie.Genre, Validators.required]
+      Title: [this.movie && this.movie.Title, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      Year: [this.movie && this.movie.Year, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      Director: [this.movie && this.movie.Director, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      Runtime: [this.movie && this.movie.Runtime, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      Genre: [this.movie && this.movie.Genre, [Validators.required]]
     });
+    this.movieFormGroup.updateValueAndValidity();
   }
 
   save = () => {
+    debugger
     let movie = this.movieFormGroup.value;
     this.movieSaved.next(movie);
   }
 
+  get form() { return this.movieFormGroup.controls; }
 }

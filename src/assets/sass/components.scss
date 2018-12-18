@@ -223,7 +223,7 @@
     }
     div.ui-dialog-content{
         padding: 0 1rem;
-        color:$textColor;
+        color:black;
         .fa{
             display: none;
         }
@@ -235,6 +235,10 @@
 }
 .ui-widget-overlay {
     z-index: 1 !important;
+
+}
+.ui-widget-header {
+    background-color: $primary !important;
 }
 .ui-sidebar	{
     background-color: white;

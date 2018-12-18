@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { MovieModel } from 'src/app/model/movie/movie.model';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'movie-card',
@@ -11,11 +12,14 @@ export class MovieCardComponent implements OnInit {
 
   @Output() OnDetailsHidden = new EventEmitter<MovieModel>();
   @Output() OnDetailsUpdated = new EventEmitter<MovieModel>();
+  @Output() OnDeleted = new EventEmitter<string>();
   @Input() displayDetails: boolean;
   @Input() movie: MovieModel;
   edit: boolean;
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private confirmationService: ConfirmationService,
+    private movieService: MovieService) { }
 
   ngOnInit() { }
 
@@ -33,7 +37,21 @@ export class MovieCardComponent implements OnInit {
       })
   }
 
-  updateMovie = (movie:MovieModel) => {
+  delete = () => {
+    
+    this.confirmationService.confirm({
+      key: this.movie.imdbID,
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+        this.OnDeleted.next(this.movie.imdbID)
+      },
+      reject: () => {
+        
+      }
+    });
+  }
+
+  updateMovie = (movie: MovieModel) => {
     let updMovie = Object.assign(this.movie, movie);
     this.OnDetailsUpdated.next(updMovie);
   }

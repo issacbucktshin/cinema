@@ -29,13 +29,18 @@ export class MoviesManagementComponent implements OnInit {
     this.movies.find(m => m.imdbID == movie.imdbID).displayDetails = true;
   }
   hideDetails = (movie: MovieModel) => {
-    let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
-    let m = this.movies.find(m => m.imdbID == movie.imdbID);
-    let n = new MovieModel
-    const c = Object.assign(n, m);
-    this.movies.splice(i, 1);
-    this.movies.splice(i, 0, c);
+    let index = this.movies.findIndex(m => m.imdbID == movie.imdbID);
+    let hiddenMovie = this.movies.find(m => m.imdbID == movie.imdbID);
+    let emptyMovie = new MovieModel
+    const newMovie = Object.assign(emptyMovie, hiddenMovie);
+    this.movies.splice(index, 1);
+    this.movies.splice(index, 0, newMovie);
   }
+  deleteMovie = (movieId:string) => {
+    let index = this.movies.findIndex(m => m.imdbID == movieId);
+    this.movies.splice(index, 1);    
+  }
+
   updateMovie = (movie:MovieModel) => {
     let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
     let m = this.movies.find(m => m.imdbID == movie.imdbID);

@@ -32,7 +32,7 @@
                 height: 50px;
                 margin: 0;
                 left: 0;
-
+                
                 button {
                     position: absolute;
                     text-align: center;
@@ -41,7 +41,13 @@
                     display: block;
                     float: right;
                     top: 0;
-                    margin-right: 1rem;
+
+                    &.edit {
+                        margin-right: 4rem;
+                    }
+                    &.delete {
+                        margin-right: 1rem;
+                    }
                 }
             }
         }
