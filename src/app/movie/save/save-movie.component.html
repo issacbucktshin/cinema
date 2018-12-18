@@ -20,7 +20,7 @@
         <mat-error *ngIf="movieFormGroup.get('Title')?.errors?.pattern">
           Title can contain only strings
         </mat-error>
-        <!-- <mat-error *ngIf="movieFormGroup.get('Title')?.errors?.notUnique">Title exssit</mat-error> -->
+        <mat-error *ngIf="duplicate">This title already exsist</mat-error>
       </mat-form-field>
 
       <mat-form-field color="accent">

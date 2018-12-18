@@ -61,11 +61,7 @@
 </div>
 <!-- edit movie popup -->
 <p-sidebar blockScroll="true" [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
-  <save-movie
-   *ngIf="edit"
-   [movie]="movie"
-   (movieClosed)="edit=false"
-   (movieSaved)="updateMovie($event)"></save-movie>
+  <save-movie [editMode]="true" *ngIf="edit" [movie]="movie" (movieClosed)="edit=false" (movieSaved)="updateMovie($event)"></save-movie>
 </p-sidebar>
 <!-- confirm popup -->
 <p-confirmDialog #cd [key]="movie.imdbID" header="Confirm movie deletion" icon="pi pi-exclamation-triangle">

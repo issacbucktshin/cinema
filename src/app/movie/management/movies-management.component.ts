@@ -41,7 +41,6 @@ export class MoviesManagementComponent implements OnInit {
     let index = this.movies.findIndex(m => m.imdbID == movieId);
     this.movies.splice(index, 1);
   }
-
   updateMovie = (movie: MovieModel) => {
     let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
     let m = this.movies.find(m => m.imdbID == movie.imdbID);
@@ -50,15 +49,13 @@ export class MoviesManagementComponent implements OnInit {
     this.movies.splice(i, 1);
     this.movies.splice(i, 0, c);
   }
-
   addMovie = (movie: MovieModel) => {
     movie.Poster = "/assets/images/poster.jpg";
     this.movies.unshift(movie);
   }
-
   setMovies = () => {
     this.loading = true;
-    this.movieService.getMovies('inception')
+    this.movieService.getMoviesFromAPI('')
       .subscribe(response => {
         let movies = response.Search;
         movies.forEach(movie => {
@@ -81,7 +78,7 @@ export class MoviesManagementComponent implements OnInit {
   }
   searchMovies = (term: string) => {
     this.loading = true;
-    this.movieService.getMovies(term)
+    this.movieService.getMoviesFromAPI(term)
       .pipe(
         finalize(() => this.loading = false)
       )
@@ -93,7 +90,6 @@ export class MoviesManagementComponent implements OnInit {
         this.alert(error)
       })
   }
-
   alert = (message: string) => {
     this.messages.push({
       detail: message,

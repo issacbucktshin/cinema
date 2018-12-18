@@ -24,8 +24,7 @@
 </div>
 <!-- add movie popup -->
 <p-sidebar blockScroll="true" [(visible)]="add" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
-  <save-movie
-   [editMode]="false" 
+  <save-movie 
    *ngIf="add" 
    (movieClosed)="add=false"
    (movieAdded)="add=false;addMovie($event)"></save-movie>
