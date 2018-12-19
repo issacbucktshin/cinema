@@ -13,15 +13,18 @@ import { AppSharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
 import { RouterModule } from '@angular/router';
 import { SaveMovieComponent } from './save/save-movie.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     AppSharedModule,
     LayoutModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     MoviesManagementComponent
   ],
   declarations: [

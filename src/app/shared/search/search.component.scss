@@ -1,17 +1,33 @@
 .search-container {
-    padding: 1rem;
     color: #525661;
     box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.1);
-    padding: 20px 28px 0;
-    
-    i {
-        float: right;
-    }
-    input {
-        width: 100%;
-        border: none;
-        height: 30px;
-        font: 600;
-        color: black;
+    background-color: white;
+
+    .main-container {
+       padding: 0;
+
+        .form {
+            margin: 0 auto;
+            width: 82%;
+
+            input {
+                width: 100%;
+                border: none;
+                height: 30px;
+                font: 600;
+                color: black;
+            }
+        }
+
+        .actions {
+            position: absolute;
+            right: 0;
+            z-index: 53;
+            top: 0;
+            
+            i {
+                color: white;
+            }
+        }
     }
 }

@@ -19,6 +19,7 @@ export class MoviesManagementComponent implements OnInit {
   show: boolean;
   messages: MessageModel[] = [];
   loading: boolean;
+  add: boolean;
 
   constructor(private movieService: MovieService) { }
 
@@ -28,50 +29,59 @@ export class MoviesManagementComponent implements OnInit {
   displayDetails = (movie: MovieModel) => {
     this.movies.find(m => m.imdbID == movie.imdbID).displayDetails = true;
   }
-  hide = (movie: MovieModel) => {
-    let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
-    let m = this.movies.find(m => m.imdbID == movie.imdbID);
-    let n = new MovieModel
-    const c = Object.assign(n, m);
-    this.movies.splice(i, 1);
-    this.movies.splice(i, 0, c);
+  hideDetails = (movie: MovieModel) => {
+    let index = this.movies.findIndex(m => m.imdbID == movie.imdbID);
+    let hiddenMovie = this.movies.find(m => m.imdbID == movie.imdbID);
+    let emptyMovie = new MovieModel
+    const newMovie = Object.assign(emptyMovie, hiddenMovie);
+    this.movies.splice(index, 1);
+    this.movies.splice(index, 0, newMovie);
   }
-  setMovies = () => {
+  deleteMovie = (movieId: string) => {
+    let index = this.movies.findIndex(m => m.imdbID == movieId);
+    this.movies.splice(index, 1);
+  }
+  updateMovie = (movie: MovieModel) => {
+    let index = this.movies.findIndex(m => m.imdbID == movie.imdbID);
+    let foundMovie = this.movies.find(m => m.imdbID == movie.imdbID);
+    let emptyMovie = new MovieModel
+    const newMovie = Object.assign(emptyMovie, foundMovie);
+    this.movies.splice(index, 1);
+    this.movies.splice(index, 0, newMovie);
+  }
+  addMovie = (movie: MovieModel) => {
+    movie.Poster = "/assets/images/poster.jpg";
+    this.movies.unshift(movie);
+  }
+  setMovies = (term: string = '') => {
     this.loading = true;
-    this.movieService.getMovies('inception')
+    this.movieService.getMoviesFromAPI(term)
       .subscribe(response => {
         let movies = response.Search;
-        movies.forEach(movie => {
-          this.getMovieDetails(movie.imdbID)
-            .pipe(
-              finalize(() => this.loading = false)
-            )
-            .subscribe(movie => {
-              movie.displayDetails = false
-              this.movies.push(movie);
-            })
-        });
+        if (movies) {
+          movies.forEach(movie => {
+            this.getMovieDetails(movie.imdbID)
+              .pipe(
+                finalize(() => this.loading = false)
+              )
+              .subscribe(movie => {
+                movie.displayDetails = false
+                this.movies.push(movie);
+              })
+          });
+        }
       }, error => {
         this.loading = false;
-        this.alert(error)
+        this.alert(error.message)
       })
   }
-  getMovieDetails = (movieId:string) => {
+  getMovieDetails = (movieId: string) => {
     return this.movieService.getById(movieId);
   }
+
   searchMovies = (term: string) => {
-    this.loading = true;
-    this.movieService.getMovies(term)
-      .pipe(
-        finalize(() => this.loading = false)
-      )
-      .subscribe(movies => {
-        console.log(movies)
-        this.movies = movies.Search
-      }, error => {
-        this.loading = false;
-        this.alert(error)
-      })
+    this.movies = [];
+    this.setMovies(term);
   }
 
   alert = (message: string) => {

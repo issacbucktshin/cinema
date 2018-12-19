@@ -1,17 +1,12 @@
 <div class="nav-container">
-  <!-- <div [class.hide-search]="!search" [class.show-search]="search">
-  </div> -->
-  <!-- <mat-toolbar color="primary" [class.hide-tollbar]="search"> -->
-  <mat-toolbar color="primary">
-    <mat-toolbar-row *ngIf="!search">
+  <mat-toolbar color="primary" *ngIf="!search">
+    <mat-toolbar-row >
       <header class="flex-container">
-        <h1>tv-app</h1>
+        <h1><img src="/assets/images/logo.png"></h1>
         <nav *ngIf="showActionIcons"></nav>
         <div *ngIf="showActionIcons" class="search" (click)="search=true"><i class='material-icons'>search</i></div>
       </header>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="search">
-      <app-search (termSearchEmiiter)="searchTerm($event)" (closeEmiiter)="search=false"></app-search>
-    </mat-toolbar-row>
   </mat-toolbar>
+  <app-search *ngIf="search" (termSearchEmiiter)="searchTerm($event)" (closeEmiiter)="search=false"></app-search>
 </div>

@@ -1,9 +1,9 @@
 <app-nav [showActionIcons]="true" (searchEmitter)="searchMovies($event)"></app-nav>
-<p-messages [(value)]="messages"></p-messages>
+<p-messages [(value)]="messages" severity="info"></p-messages>
 <div class="movies-management-container">
   <section>
     <div class="actions">
-      <button mat-mini-fab color="accent">
+      <button mat-mini-fab color="accent" (click)="add=true">
         <mat-icon color="primary">add</mat-icon>
       </button>
     </div>
@@ -13,8 +13,8 @@
       <ul>
         <li *ngFor="let movie of movies">
           <div #actualTarget>
-            <movie-card (hided)="hide($event)" *ngIf="movie.Poster != 'N/A'" (click)="displayDetails(movie)"
-              [movie]="movie" [displayDetails]="movie?.displayDetails"></movie-card>
+            <movie-card (OnDetailsHidden)="hideDetails($event)" (OnDetailsUpdated)="updateMovie($event)" (OnDeleted)="deleteMovie($event)"
+              *ngIf="movie.Poster != 'N/A'" (click)="displayDetails(movie)" [movie]="movie" [displayDetails]="movie?.displayDetails"></movie-card>
           </div>
         </li>
       </ul>
@@ -22,3 +22,10 @@
     <app-loader *ngIf="loading"></app-loader>
   </section>
 </div>
+<!-- add movie popup -->
+<p-sidebar blockScroll="true" [(visible)]="add" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
+  <save-movie 
+   *ngIf="add" 
+   (movieClosed)="add=false"
+   (movieAdded)="add=false;addMovie($event)"></save-movie>
+</p-sidebar>

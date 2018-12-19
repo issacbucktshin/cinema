@@ -1,13 +1,23 @@
-<div class="search-container main-container">
-  <div class="form">
-    <form class="example-form" [formGroup]="searchFormGroup">
-      <mat-form-field class="example-full-width">
-        <input matInput formControlName="search" placeholder="Search Movie" (keyup)="termSearched()">
-        <i class='material-icons'>search</i>
-      </mat-form-field>
-    </form>
-  </div>
-  <div class="actions">
-    <i class='material-icons' (click)="hide()">close</i>
+<div class="search-container">
+  <div class="main-container">
+    <div></div>
+    <div class="form">
+      <form class="example-form" [formGroup]="searchFormGroup">
+        <i class='material-icons'></i>
+        <mat-form-field [floatLabel]="'never'">
+          <mat-placeholder>Search</mat-placeholder>
+          <input matInput type="text" color="accent" formControlName="search" (keyup)="termSearched()"
+            autofocus />
+          <button mat-button matSuffix mat-icon-button aria-label="Clear">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="actions">
+      <button mat-icon-button color="primary" (click)="hide()">
+        <mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

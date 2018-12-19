@@ -1,19 +1,18 @@
 <div class="movie-card-container pointer">
+  <!-- default movie display -->
   <div *ngIf="!movie.displayDetails" class='card' [ngStyle]="{'background': 'url(' + movie.Poster +')', 'background-size': '300px 400px', 'background-repeat': 'no-repeat'}">
     <header>
       <h4 class='title'></h4>
     </header>
-    <div class='card-body'>
-      <div>
-
-      </div>
-    </div>
+    <div class='card-body'></div>
   </div>
   <!-- details popup -->
   <div *ngIf="movie.displayDetails" class='card'>
     <header>
       <h4 class='title'>
-        <i class='material-icons' (click)="hide()">close</i>
+        <button mat-icon-button color="accent">
+          <i class='material-icons' color="primary" (click)="hide()">keyboard_backspace</i>
+        </button>
       </h4>
     </header>
     <div class='card-body'>
@@ -50,14 +49,24 @@
         </div>
       </div>
       <div class="actions">
-        <button mat-mini-fab color="accent" (click)="edit=true">
+        <button class="edit" mat-mini-fab color="accent" (click)="edit=true">
           <mat-icon color="primary">edit</mat-icon>
+        </button>
+        <button class="delete" mat-mini-fab color="primary" (click)="delete()">
+          <mat-icon color="accent">delete</mat-icon>
         </button>
       </div>
     </div>
   </div>
 </div>
 <!-- edit movie popup -->
-<p-sidebar [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
-  <save-movie *ngIf="edit" [movie]="movie"></save-movie>
+<p-sidebar blockScroll="true" [(visible)]="edit" position="right" styleClass="ui-sidebar-md" [baseZIndex]="10000">
+  <save-movie [editMode]="true" *ngIf="edit" [movie]="movie" (movieClosed)="edit=false" (movieSaved)="updateMovie($event)"></save-movie>
 </p-sidebar>
+<!-- confirm popup -->
+<p-confirmDialog #cd [key]="movie.imdbID" header="Confirm movie deletion" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button [ngStyle]="{'margin-right': '0.5rem'}" mat-stroked-button color="primary" (click)="cd.reject()">Cancel</button>
+    <button [ngStyle]="{'margin-right': '0.5rem'}" mat-raised-button color="accent" (click)="cd.accept()">OK</button>
+  </p-footer>
+</p-confirmDialog>

@@ -7,7 +7,6 @@ export class FriendlyTitlePipe implements PipeTransform {
 
   transform(title: string): string {
     let friendlyTitle = title.replace(/[^\w\s]/gi, '')
-    return friendlyTitle.charAt(1).toUpperCase() + friendlyTitle.slice(2);
+    return friendlyTitle.charAt(0).toUpperCase() + friendlyTitle.slice(1);
   }
-
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieService } from './movie/movie.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
+  title = 'cinema';
+  constructor(private movieService: MovieService) { }
+
   ngOnInit() {
-    
+    this.movieService.loadMovies('inception')
+      .catch((error) => console.log(error))
   }
 }

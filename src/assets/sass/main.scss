@@ -2,7 +2,7 @@
 @import "components";
 
 html,body {
-   
+    background-color:rgba(238, 238, 238, 1); 
     margin: 0;
     padding: 0;
     text-align: if( $direction, left,right);
@@ -22,9 +22,16 @@ html,body {
         font-family: inherit;
         font-weight: 700;
     }
+    .ui-messages-error {
+        background: white;
+        color: red;
+        font-family: initial;
+        font-size: 1rem;
+        font-style: inherit;
+        font-weight: 100;
+        margin: 5px;
+    }
 }
-
-
 .main-container {
     position: relative;
     padding: 0 100px;

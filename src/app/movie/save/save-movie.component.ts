@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MovieModel } from 'src/app/model/movie/movie.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ValidateDuplicateMovie } from "../../shared/validators/duplicate-movie.validator";
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'save-movie',
@@ -8,10 +11,58 @@ import { MovieModel } from 'src/app/model/movie/movie.model';
 })
 export class SaveMovieComponent implements OnInit {
 
-  @Input() movie:MovieModel;
-  constructor() { }
+  @Input() movie: MovieModel;
+  @Input() editMode: boolean;
+  @Output() movieSaved = new EventEmitter;
+  @Output() movieAdded = new EventEmitter<MovieModel>();
+  @Output() movieClosed = new EventEmitter;
+  duplicate:boolean;
+  movieFormGroup: FormGroup;
+
+  constructor(
+    private movieService: MovieService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    debugger
+    this.createForm();
   }
 
+  createForm = () => {
+    this.movieFormGroup = this.formBuilder.group({
+      Title: [this.movie && this.movie.Title, [ValidateDuplicateMovie, Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      Year: [this.movie && this.movie.Year, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      Director: [this.movie && this.movie.Director, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      Runtime: [this.movie && this.movie.Runtime, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      Genre: [this.movie && this.movie.Genre, [Validators.required]]
+    });
+    this.movieFormGroup.updateValueAndValidity();
+  }
+
+  save = () => {
+    let movie = this.movieFormGroup.value;
+    if (this.editMode) {
+      this.movieSaved.next(movie);
+    }
+    else {
+      this.movieAdded.next(movie);
+    }
+    // this.movieService.getMovies()
+    //   .subscribe(movies => {
+    //     let index = movies.findIndex(m => m.Title == movie.Title)
+    //     if (!index) {
+    //       this.duplicate = true;
+    //       return;
+    //     }
+    //     else {
+          
+    //     }
+    //   })
+  }
+
+  close = () => {
+    this.movieClosed.next();
+  }
+
+  get form() { return this.movieFormGroup.controls; }
 }
