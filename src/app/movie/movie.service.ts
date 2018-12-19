@@ -25,17 +25,14 @@ export class MovieService {
     return this.moviesSubscription.asObservable();
   }
   updateMovies = (movies:MovieModel[]) => {
-    // this.movis = [];
     this.movis = movies;
-    // this.moviesSubscription.next(movies);
   }
   getMoviesFromAPI = (title: string) => {
     let params = new HttpParams();
-    params = params.append('s', title || 'inception');
+    params = params.append('s', title || 'ted');
     params = params.append("apikey", "7456763a");
 
     let url: string = `${this.api}`;
-    //return this.httpClient.get<any>(url, { params: params })
     return this.httpClient.get<any>(url, { params: params })
       .pipe(
         map((movies:any)=>{
