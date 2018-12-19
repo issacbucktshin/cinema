@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../movie.service';
 import { MovieModel } from 'src/app/model/movie/movie.model';
 import { finalize } from 'rxjs/operators';
 import { MessageModel } from 'src/app/model/message/message.mode';
 import { MessageSeverity } from 'src/app/model/message/message-severity.enum';
+import { FriendlyTitlePipe } from 'src/app/shared/pipes/friendly-title.pipe';
 
 @Component({
   selector: 'movies-management',
@@ -64,7 +64,8 @@ export class MoviesManagementComponent implements OnInit {
               .pipe(
                 finalize(() => this.loading = false)
               )
-              .subscribe(movie => {
+              .subscribe(movie => {  
+                movie.Title = new FriendlyTitlePipe().transform(movie.Title) ;             
                 movie.displayDetails = false
                 this.movies.push(movie);
               })

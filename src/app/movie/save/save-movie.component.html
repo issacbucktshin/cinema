@@ -17,9 +17,9 @@
         <mat-error *ngIf="movieFormGroup.get('Title')?.errors?.required">
           Title is missing
         </mat-error>
-        <mat-error *ngIf="movieFormGroup.get('Title')?.errors?.pattern">
-          Title can contain only strings
-        </mat-error>
+        <div class="error" [class.show]="movieFormGroup.get('Title')?.hasError('pattern')">
+          * Title can contain only strings
+        </div>
         <mat-error *ngIf="duplicate">This title already exsist</mat-error>
       </mat-form-field>
 
@@ -28,9 +28,9 @@
         <mat-error *ngIf="movieFormGroup.get('Year')?.errors?.required">
           Year is missing
         </mat-error>
-        <mat-error *ngIf="movieFormGroup.get('Year')?.errors?.pattern">
-          Year can be only number
-        </mat-error>
+        <div class="error" [class.show]="movieFormGroup.get('Year')?.hasError('pattern')">
+          *Year can be only numbers
+        </div>
       </mat-form-field>
 
       <mat-form-field color="accent">
@@ -38,9 +38,9 @@
         <mat-error *ngIf="movieFormGroup.get('Director')?.errors?.required">
           Director is missing
         </mat-error>
-        <mat-error *ngIf="movieFormGroup.get('Director')?.errors?.pattern">
-          Director can contain only strings
-        </mat-error>
+        <div class="error" [class.show]="movieFormGroup.get('Director')?.hasError('pattern')">
+          *Runtime can contain only text
+        </div>
       </mat-form-field>
 
       <mat-form-field color="accent">
@@ -48,9 +48,9 @@
         <mat-error *ngIf="movieFormGroup.get('Runtime')?.errors?.required">
           Runtime is missing
         </mat-error>
-        <mat-error *ngIf="movieFormGroup.get('Runtime')?.hasError('pattern')">
-          Runtime can contain only numbers
-        </mat-error>
+        <div class="error" [class.show]="movieFormGroup.get('Runtime')?.hasError('pattern')">
+          *Runtime can contain only numbers
+        </div>
       </mat-form-field>
 
       <mat-form-field color="accent">

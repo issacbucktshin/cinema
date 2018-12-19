@@ -7,7 +7,6 @@ import { AppRoutes } from './app.routing';
 import { MovieModule } from './movie/movie.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './layout/nav/nav.component';
 
 @NgModule({
   declarations: [

@@ -20,44 +20,34 @@ export class SaveMovieComponent implements OnInit {
   movieFormGroup: FormGroup;
 
   constructor(
-    private movieService: MovieService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    debugger
     this.createForm();
   }
 
   createForm = () => {
     this.movieFormGroup = this.formBuilder.group({
-      Title: [this.movie && this.movie.Title, [ValidateDuplicateMovie, Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      Title: [this.movie && this.movie.Title, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       Year: [this.movie && this.movie.Year, [Validators.required, Validators.pattern('^[0-9]*$')]],
       Director: [this.movie && this.movie.Director, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       Runtime: [this.movie && this.movie.Runtime, [Validators.required, Validators.pattern('^[0-9]*$')]],
       Genre: [this.movie && this.movie.Genre, [Validators.required]]
     });
+    var x =  this.movieFormGroup.get('Runtime').errors.pattern
     this.movieFormGroup.updateValueAndValidity();
   }
 
   save = () => {
-    let movie = this.movieFormGroup.value;
+    let movie : MovieModel = this.movieFormGroup.value;
+    movie.Time = `${movie.Runtime} min`
+
     if (this.editMode) {
       this.movieSaved.next(movie);
     }
     else {
       this.movieAdded.next(movie);
     }
-    // this.movieService.getMovies()
-    //   .subscribe(movies => {
-    //     let index = movies.findIndex(m => m.Title == movie.Title)
-    //     if (!index) {
-    //       this.duplicate = true;
-    //       return;
-    //     }
-    //     else {
-          
-    //     }
-    //   })
   }
 
   close = () => {

@@ -43,11 +43,7 @@
                     height: 200px;
                     padding: 10px 0;
                     margin-bottom: 25px;
-                    overflow: hidden;
-
-                    img {
-
-                    }
+                    overflow: hidden;       
                 }
                 .movie-dtails {
                     padding: 10px 0px;
@@ -61,17 +57,7 @@
 
             .movie-image {
                 min-width: 35%;
-                // padding: 0px 10px;
-                display: flex;
-                // position: relative;
-                // z-index: 99;
-                // background: red;
-
-                .movie-poster {
-                    // max-width: 100%;
-                    // max-height: 100%;
-                    // margin: auto;
-                }
+                display: flex;       
             }
             .movie-dtails {
                 min-width: 65%;
@@ -105,9 +91,7 @@
                         position: relative;
                         z-index: 99;
                     }
-
                 }
             }
-
         }
-}
+    }

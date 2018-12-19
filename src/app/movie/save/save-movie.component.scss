@@ -20,7 +20,24 @@
         }
         .title {
             width: 19em;
-        };
+        }
+       
+        
+    }
+    .error {
+        display: none;
+        font-size: 0.8rem;
+        font-family: inherit;
+        font-style: inherit;
+        position: absolute;
+        margin-top: 0.8rem;
+        opacity: 1;
+        transform: translateY(0%);
+        
+        &.show {
+            display: block;
+            color: red;
+        }
     }
     .actions {
         text-align: right;

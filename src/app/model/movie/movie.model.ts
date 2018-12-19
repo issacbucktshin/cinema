@@ -5,6 +5,7 @@ export class MovieModel
     Title:string;
     Year: Date;
     Runtime: number;
+    Time: string;
     Genre:string;
     Director: string;
     Plot?:string;
