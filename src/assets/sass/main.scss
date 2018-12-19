@@ -22,9 +22,16 @@ html,body {
         font-family: inherit;
         font-weight: 700;
     }
+    .ui-messages-error {
+        background: white;
+        color: red;
+        font-family: initial;
+        font-size: 1rem;
+        font-style: inherit;
+        font-weight: 100;
+        margin: 5px;
+    }
 }
-
-
 .main-container {
     position: relative;
     padding: 0 100px;

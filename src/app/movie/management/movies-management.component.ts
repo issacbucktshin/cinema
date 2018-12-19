@@ -42,54 +42,48 @@ export class MoviesManagementComponent implements OnInit {
     this.movies.splice(index, 1);
   }
   updateMovie = (movie: MovieModel) => {
-    let i = this.movies.findIndex(m => m.imdbID == movie.imdbID);
-    let m = this.movies.find(m => m.imdbID == movie.imdbID);
-    let n = new MovieModel
-    const c = Object.assign(n, m);
-    this.movies.splice(i, 1);
-    this.movies.splice(i, 0, c);
+    let index = this.movies.findIndex(m => m.imdbID == movie.imdbID);
+    let foundMovie = this.movies.find(m => m.imdbID == movie.imdbID);
+    let emptyMovie = new MovieModel
+    const newMovie = Object.assign(emptyMovie, foundMovie);
+    this.movies.splice(index, 1);
+    this.movies.splice(index, 0, newMovie);
   }
   addMovie = (movie: MovieModel) => {
     movie.Poster = "/assets/images/poster.jpg";
     this.movies.unshift(movie);
   }
-  setMovies = () => {
+  setMovies = (term: string = '') => {
     this.loading = true;
-    this.movieService.getMoviesFromAPI('')
+    this.movieService.getMoviesFromAPI(term)
       .subscribe(response => {
         let movies = response.Search;
-        movies.forEach(movie => {
-          this.getMovieDetails(movie.imdbID)
-            .pipe(
-              finalize(() => this.loading = false)
-            )
-            .subscribe(movie => {
-              movie.displayDetails = false
-              this.movies.push(movie);
-            })
-        });
+        if (movies) {
+          movies.forEach(movie => {
+            this.getMovieDetails(movie.imdbID)
+              .pipe(
+                finalize(() => this.loading = false)
+              )
+              .subscribe(movie => {
+                movie.displayDetails = false
+                this.movies.push(movie);
+              })
+          });
+        }
       }, error => {
         this.loading = false;
-        this.alert(error)
+        this.alert(error.message)
       })
   }
   getMovieDetails = (movieId: string) => {
     return this.movieService.getById(movieId);
   }
+
   searchMovies = (term: string) => {
-    this.loading = true;
-    this.movieService.getMoviesFromAPI(term)
-      .pipe(
-        finalize(() => this.loading = false)
-      )
-      .subscribe(movies => {
-        console.log(movies)
-        this.movies = movies.Search
-      }, error => {
-        this.loading = false;
-        this.alert(error)
-      })
+    this.movies = [];
+    this.setMovies(term);
   }
+
   alert = (message: string) => {
     this.messages.push({
       detail: message,
